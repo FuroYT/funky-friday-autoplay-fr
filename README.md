@@ -1,5 +1,5 @@
 # Funky Friday Autoplayer
-A fully open source auto player script for https://www.roblox.com/games/6447798030<br>
+A fully open source auto player script for https://www.roblox.com/games/6447798030<br> translated in french
 
 ## Reporting bugs
 You can open up an issue on the GitHub (although I don't check it very much) or you may message me on v3rmillion / Discord.<br>
