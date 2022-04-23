@@ -88,7 +88,7 @@ if type(getinfo) ~= 'function' then
 end
 
 local UI = urlLoad("https://raw.githubusercontent.com/wally-rblx/LinoriaLib/main/Library.lua")
-local metadata = urlLoad("https://raw.githubusercontent.com/wally-rblx/funky-friday-autoplay/main/metadata.lua")
+local metadata = urlLoad("https://raw.githubusercontent.com/FuroYT/funky-friday-autoplay-fr/main/metadata.lua?token=GHSAT0AAAAAABSBZH5YILXJ7KHVRFZKKXHQYTD44MQ")
 local httpService = game:GetService('HttpService')
 
 local framework, scrollHandler, network
@@ -410,7 +410,7 @@ local ActivateUnlockables do
         local idx = table.find(framework.SongsWhitelist, client.UserId)
         if idx then return end
 
-        UI:Notify('Developer arrows have been unlocked!', 3)
+        UI:Notify('Les notes de developeurs on été déverrouillées!', 3)
         table.insert(framework.SongsWhitelist, client.UserId)
     end
 end
@@ -608,12 +608,12 @@ Groups.Autoplayer = Tabs.Main:AddLeftGroupbox('Autoplayer')
     Groups.Autoplayer:AddToggle('SecondaryPress', { Text = 'Seconary press mode', Tooltip = 'Enable this only if the primary autoplayer does not work.' })
 
     Groups.Autoplayer:AddDivider()
-    Groups.Autoplayer:AddDropdown('AutoplayerMode', { Text = 'Autoplayer mode', Default = 1, Values = { 'Chances', 'Manual' } })
-    Groups.Autoplayer:AddDropdown('DelayMode', { Text = 'Delay mode', Default = 1, Values = { 'Manual', 'Random' } })
+    Groups.Autoplayer:AddDropdown('AutoplayerMode', { Text = 'Bot', Default = 1, Values = { 'Chances', 'Manual' } })
+    Groups.Autoplayer:AddDropdown('DelayMode', { Text = 'Mode de délai', Default = 1, Values = { 'Manual', 'Random' } })
 
     Groups.Autoplayer:AddDivider()
     Groups.Autoplayer:AddDropdown('ScoreModifier', { 
-        Text = 'Score modifications', 
+        Text = 'Modifications de score', 
         Default = 1, 
         Values = { 'Do nothing', 'No decrease on miss', 'Increase score on miss' },
         Tooltip = 'Modifies certain game functions to help you keep your score up!',
@@ -638,7 +638,7 @@ Groups.HitTiming = Tabs.Main:AddRightTabbox('Hit timing')
         Groups.RandomTiming:AddSlider('HeldDelayMin',   { Text = 'Minimum held note delay (ms)', Min = 0, Max = 500, Default = 0,   Rounding = 0 })
         Groups.RandomTiming:AddSlider('HeldDelayMax',   { Text = 'Maximum held note delay (ms)', Min = 0, Max = 100, Default = 20,  Rounding = 0 })
 
-Groups.Keybinds = Tabs.Main:AddLeftGroupbox('Keybinds')
+Groups.Keybinds = Tabs.Main:AddLeftGroupbox('Touches')
     Groups.Keybinds:AddLabel('Sick'):AddKeyPicker('SickBind', { Default = 'One', NoUI = true })
     Groups.Keybinds:AddLabel('Good'):AddKeyPicker('GoodBind', { Default = 'Two', NoUI = true })
     Groups.Keybinds:AddLabel('Ok'):AddKeyPicker('OkayBind', { Default = 'Three', NoUI = true })
@@ -646,44 +646,51 @@ Groups.Keybinds = Tabs.Main:AddLeftGroupbox('Keybinds')
 
 Groups.Credits = Tabs.Main:AddRightGroupbox('Credits')
     Groups.Credits:AddLabel('<font color="#3da5ff">wally</font> - script')
-    Groups.Credits:AddLabel('<font color="#de6cff">Sezei</font> - contributor')
-    Groups.Credits:AddLabel('Inori - ui library')
-    Groups.Credits:AddLabel('Jan - old ui library')
+    Groups.Credits:AddLabel('<font color="#1badec">Furo</font> - traducteur')
+    Groups.Credits:AddLabel('<font color="#de6cff">Sezei</font> - contributeur')
+    Groups.Credits:AddLabel('Inori - librarie visuelle')
+    Groups.Credits:AddLabel('Jan - ancienne libraire visuelle')
 
-Groups.Unlockables = Tabs.Main:AddRightGroupbox('Unlockables')
-    Groups.Unlockables:AddButton('Unlock developer notes', ActivateUnlockables)
+Groups.Unlockables = Tabs.Main:AddRightGroupbox('déverrouillables')
+    Groups.Unlockables:AddButton('Dévérouilles les notes de dévelopeurs', ActivateUnlockables)
 
-Groups.Misc = Tabs.Main:AddRightGroupbox('Miscellaneous')
+Groups.Misc = Tabs.Main:AddRightGroupbox('Avancé')
     Groups.Misc:AddLabel(metadata.message or 'no message found!', true)
 
     Groups.Misc:AddDivider()
-    Groups.Misc:AddButton('Unload script', function() pcall(shared._unload) end)
-    Groups.Misc:AddButton('Copy discord', function()
+    Groups.Misc:AddButton('Fermer le script', function() pcall(shared._unload) end)
+    Groups.Misc:AddButton('Copier le discord du développeur original', function()
         if pcall(setclipboard, "https://wally.cool/discord") then
-            UI:Notify('Successfully copied discord link to your clipboard!', 5)
+            UI:Notify('Copié le discord du développeur original dans le presse papier!', 5)
+        end
+    end)
+    Groups.Misc:AddButton('Copier le discord du traducteur', function()
+        if pcall(setclipboard, "https://discord.gg/jJcK2DrrUU") then
+            UI:Notify('Copié le discord du traducteur dans le presse papier!', 5)
         end
     end)
 
-    Groups.Misc:AddLabel('Menu toggle'):AddKeyPicker('MenuToggle', { Default = 'Delete', NoUI = true })
+
+    Groups.Misc:AddLabel('Montrer/Cacher le script'):AddKeyPicker('MenuToggle', { Default = 'Delete', NoUI = true })
 
     UI.ToggleKeybind = Options.MenuToggle
 
 if type(readfile) == 'function' and type(writefile) == 'function' and type(makefolder) == 'function' and type(isfolder) == 'function' then
-    Tabs.Settings = Window:AddTab('Settings')
-    Groups.Configs = Tabs.Settings:AddLeftGroupbox('Configs')
+    Tabs.Settings = Window:AddTab('Paramètres')
+    Groups.Configs = Tabs.Settings:AddLeftGroupbox('Configurations')
 
     makefolder('funky_friday_autoplayer')
     makefolder('funky_friday_autoplayer\\configs')
 
-    Groups.Configs:AddDropdown('ConfigList', { Text = 'Config list', Values = {} })
-    Groups.Configs:AddInput('ConfigName',    { Text = 'Config name' })
+    Groups.Configs:AddDropdown('ConfigList', { Text = 'Liste de la configuration', Values = {} })
+    Groups.Configs:AddInput('ConfigName',    { Text = 'Nom de la configuration' })
 
     Groups.Configs:AddDivider()
 
-    Groups.Configs:AddButton('Save config', function()
+    Groups.Configs:AddButton('Sauvegarder la configuration', function()
         local name = Options.ConfigName.Value;
         if name:gsub(' ', '') == '' then
-            return UI:Notify('Invalid config name.', 3)
+            return UI:Notify('Nom de configuration invalide.', 3)
         end
 
         local success, err = SaveManager:Save(name)
@@ -691,18 +698,18 @@ if type(readfile) == 'function' and type(writefile) == 'function' and type(makef
             return UI:Notify(tostring(err), 5)
         end
 
-        UI:Notify(string.format('Saved config %q', name), 5)
+        UI:Notify(string.format('Sauvegardé la configuration %q', name), 5)
         task.defer(SaveManager.Refresh)
     end)
 
-    Groups.Configs:AddButton('Load config', function()
+    Groups.Configs:AddButton('Charger la configuration', function()
         local name = Options.ConfigList.Value
         local success, err = SaveManager:Load(name)
         if not success then
             return UI:Notify(tostring(err), 5)
         end
 
-        UI:Notify(string.format('Loaded config %q', name), 5)
+        UI:Notify(string.format('Chargé la configuration %q', name), 5)
     end)
 
     Groups.Configs:AddButton('Refresh list', SaveManager.Refresh)
@@ -714,4 +721,4 @@ else
 end
 
 
-UI:Notify(string.format('Loaded script in %.4f second(s)!', tick() - start), 3)
+UI:Notify(string.format('Script chargé en %.4f seconde(s)!', tick() - start), 3)
