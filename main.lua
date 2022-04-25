@@ -88,7 +88,7 @@ if type(getinfo) ~= 'function' then
 end
 
 local UI = urlLoad("https://raw.githubusercontent.com/wally-rblx/LinoriaLib/main/Library.lua")
-local metadata = urlLoad("https://raw.githubusercontent.com/FuroYT/funky-friday-autoplay-fr/main/metadata.lua?token=GHSAT0AAAAAABSBZH5YILXJ7KHVRFZKKXHQYTD44MQ")
+local metadata = urlLoad("https://raw.githubusercontent.com/FuroYT/funky-friday-autoplay-fr/main/metadata.lua")
 local httpService = game:GetService('HttpService')
 
 local framework, scrollHandler, network
