@@ -592,7 +592,7 @@ UI.AccentColorDark = UI:GetDarkerColor(UI.AccentColor);
 UI:UpdateColorsUsingRegistry()
 
 local Window = UI:CreateWindow({
-    Title = string.format('funky friday autoplayer - version %s | updated: %s', metadata.version, metadata.updated),
+    Title = string.format('FF Bot - version %s | Mis a jour le %s | Traduit par Furo', metadata.version, metadata.updated),
     AutoShow = true,
     
     Center = true,
@@ -603,31 +603,31 @@ local Tabs = {}
 Tabs.Main = Window:AddTab('Main')
 
 local Groups = {}
-Groups.Autoplayer = Tabs.Main:AddLeftGroupbox('Autoplayer')
-    Groups.Autoplayer:AddToggle('Autoplayer', { Text = 'Autoplayer' }):AddKeyPicker('AutoplayerBind', { Default = 'End', NoUI = true, SyncToggleState = true })
-    Groups.Autoplayer:AddToggle('SecondaryPress', { Text = 'Seconary press mode', Tooltip = 'Enable this only if the primary autoplayer does not work.' })
+Groups.Autoplayer = Tabs.Main:AddLeftGroupbox('Bot')
+    Groups.Autoplayer:AddToggle('Autoplayer', { Text = 'Bot' }):AddKeyPicker('AutoplayerBind', { Default = 'End', NoUI = true, SyncToggleState = true })
+    Groups.Autoplayer:AddToggle('SecondaryPress', { Text = "Mode d'appui secondaire", Tooltip = "Activer sa uniquement si le bot ne fonction pas" })
 
     Groups.Autoplayer:AddDivider()
-    Groups.Autoplayer:AddDropdown('AutoplayerMode', { Text = 'Bot', Default = 1, Values = { 'Chances', 'Manual' } })
-    Groups.Autoplayer:AddDropdown('DelayMode', { Text = 'Mode de délai', Default = 1, Values = { 'Manual', 'Random' } })
+    Groups.Autoplayer:AddDropdown('AutoplayerMode', { Text = 'Mode de precision', Default = 1, Values = { 'Chances', 'Manuel' } })
+    Groups.Autoplayer:AddDropdown('DelayMode', { Text = 'Mode de delai', Default = 1, Values = { 'Manuel', 'Aleatoire' } })
 
     Groups.Autoplayer:AddDivider()
     Groups.Autoplayer:AddDropdown('ScoreModifier', { 
         Text = 'Modifications de score', 
         Default = 1, 
-        Values = { 'Do nothing', 'No decrease on miss', 'Increase score on miss' },
-        Tooltip = 'Modifies certain game functions to help you keep your score up!',
+        Values = { 'Ne rien faire', "Pas de diminution en cas de faute", 'Augmenter le score en cas de faute' },
+        Tooltip = 'Modifie certaines fonctions du jeu pour vous aider a maintenir votre score !',
     })
 
-Groups.HitChances = Tabs.Main:AddLeftGroupbox('Hit chances')
-    Groups.HitChances:AddSlider('SickChance',   { Text = 'Sick chance', Min = 0, Max = 100, Default = 100, Suffix = '%', Rounding = 0 })
-    Groups.HitChances:AddSlider('GoodChance',   { Text = 'Good chance', Min = 0, Max = 100, Default = 0, Suffix = '%', Rounding = 0 })
-    Groups.HitChances:AddSlider('OkChance',     { Text = 'Ok chance',   Min = 0, Max = 100, Default = 0, Suffix = '%', Rounding = 0 })
-    Groups.HitChances:AddSlider('BadChance',    { Text = 'Bad chance',  Min = 0, Max = 100, Default = 0, Suffix = '%', Rounding = 0 })
-    Groups.HitChances:AddSlider('MissChance',   { Text = 'Miss chance', Min = 0, Max = 100, Default = 0, Suffix = '%', Rounding = 0 })
+Groups.HitChances = Tabs.Main:AddLeftGroupbox('Chances')
+    Groups.HitChances:AddSlider('SickChance',   { Text = 'Sick', Min = 0, Max = 100, Default = 100, Suffix = '%', Rounding = 0 })
+    Groups.HitChances:AddSlider('GoodChance',   { Text = 'Good', Min = 0, Max = 100, Default = 0, Suffix = '%', Rounding = 0 })
+    Groups.HitChances:AddSlider('OkChance',     { Text = 'Ok',   Min = 0, Max = 100, Default = 0, Suffix = '%', Rounding = 0 })
+    Groups.HitChances:AddSlider('BadChance',    { Text = 'Bad',  Min = 0, Max = 100, Default = 0, Suffix = '%', Rounding = 0 })
+    Groups.HitChances:AddSlider('MissChance',   { Text = 'Faute', Min = 0, Max = 100, Default = 0, Suffix = '%', Rounding = 0 })
 
-Groups.HitTiming = Tabs.Main:AddRightTabbox('Hit timing')
-    Groups.ManualTiming = Groups.HitTiming:AddTab('Manual delay')
+Groups.HitTiming = Tabs.Main:AddRightTabbox("Timing d'appui")
+    Groups.ManualTiming = Groups.HitTiming:AddTab('Delai manuel')
         Groups.ManualTiming:AddSlider('ReleaseDelay',   { Text = 'Release delay (ms)',  Min = 0,   Max = 500, Default = 20, Rounding = 0 })
         Groups.ManualTiming:AddSlider('HeldDelay',      { Text = 'Held delay (ms)',     Min = -20, Max = 100, Default = 0,  Rounding = 0 })
     
@@ -676,7 +676,7 @@ Groups.Misc = Tabs.Main:AddRightGroupbox('Avancé')
     UI.ToggleKeybind = Options.MenuToggle
 
 if type(readfile) == 'function' and type(writefile) == 'function' and type(makefolder) == 'function' and type(isfolder) == 'function' then
-    Tabs.Settings = Window:AddTab('Paramètres')
+    Tabs.Settings = Window:AddTab('Parametres')
     Groups.Configs = Tabs.Settings:AddLeftGroupbox('Configurations')
 
     makefolder('funky_friday_autoplayer')
@@ -712,7 +712,7 @@ if type(readfile) == 'function' and type(writefile) == 'function' and type(makef
         UI:Notify(string.format('Chargé la configuration %q', name), 5)
     end)
 
-    Groups.Configs:AddButton('Refresh list', SaveManager.Refresh)
+    Groups.Configs:AddButton('Rafraichir la liste', SaveManager.Refresh)
 
     task.defer(SaveManager.Refresh)
     task.defer(SaveManager.Check)
