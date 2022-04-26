@@ -410,7 +410,7 @@ local ActivateUnlockables do
         local idx = table.find(framework.SongsWhitelist, client.UserId)
         if idx then return end
 
-        UI:Notify('Les notes de developeurs on été déverrouillées!', 3)
+        UI:Notify('Les notes de developeurs on ete deverrouillees!', 3)
         table.insert(framework.SongsWhitelist, client.UserId)
     end
 end
@@ -651,8 +651,8 @@ Groups.Credits = Tabs.Main:AddRightGroupbox('Credits')
     Groups.Credits:AddLabel('Inori - librarie visuelle')
     Groups.Credits:AddLabel('Jan - ancienne libraire visuelle')
 
-Groups.Unlockables = Tabs.Main:AddRightGroupbox('déverrouillables')
-    Groups.Unlockables:AddButton('Dévérouilles les notes de dévelopeurs', ActivateUnlockables)
+Groups.Unlockables = Tabs.Main:AddRightGroupbox('deverrouillables')
+    Groups.Unlockables:AddButton('Deverouiller les notes de dévelopeurs', ActivateUnlockables)
 
 Groups.Misc = Tabs.Main:AddRightGroupbox('Avancé')
     Groups.Misc:AddLabel(metadata.message or 'no message found!', true)
